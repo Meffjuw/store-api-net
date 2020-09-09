@@ -1,0 +1,12 @@
+CREATE PROCEDURE insert_product ( @Name         nvarchar(50),
+                                  @Visible      bit,
+                                  @ProductId    nvarchar(max),
+                                  @ReleaseDate  nvarchar(max),
+                                  @VendorId     nvarchar(50))
+AS
+BEGIN
+
+  INSERT INTO Products (Name, Visible, ProductId, ReleaseDate, VendorId) 
+  SELECT @Name, @Visible, @ProductId, @ReleaseDate, v.[Id] FROM Vendors v WHERE v.VendorId = @VendorId
+
+END
